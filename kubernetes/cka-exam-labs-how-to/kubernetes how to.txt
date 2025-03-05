@@ -1,0 +1,29 @@
+Kubernetes how to 
+## how to manually schedule a pod to node
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  nodeName: node01
+  containers:
+  -  image: nginx
+     name: nginx
+## check if node01 has been assigned pods
+kubectl get pods -o wide
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+Labels and selectors
+## how to view labels on pods in specific environment
+kubectl describe pods | grep -i env=dev | wc -l
+## how to view all objects in an enviroment
+kubeclt get all --selector env=prod --no-headers | wc -l
+## alternatively
+kubectl get all -l env=prod --no-headers | wc -l
+## how to find multiple labels
+kubectl get pods -l env=prod,bu=finance,tier=frontend --no-headers | wc -l
+## how to replace in vim
+%s/<string1>/<string2>
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
